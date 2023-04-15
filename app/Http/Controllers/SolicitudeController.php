@@ -19,6 +19,20 @@ class SolicitudeController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'primer_nombre'    => 'string|required',
+            'segundo_nombre'   => 'string|required',
+            'primer_apellido'  => 'string|required',
+            'segundo_apellido' => 'string|required',
+            'cui'              => 'string|required',
+            'tipo_documento'   => 'string|required',
+            'telefono'         => 'string|required',
+            'direccion'        => 'string|required',
+            'email'            => 'string|required',
+            'sexo'             => 'string|required',
+            'estado_civil'     => 'string|required',
+            'attachment'       => 'file|max:1000|mimes:pdf'
+        ]);
         $solicitude = Solicitude::create( $request->all() );
 
         if( $request->hasFile('attachment') ){

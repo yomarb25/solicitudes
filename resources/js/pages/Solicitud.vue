@@ -137,6 +137,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
+import { toast } from 'vue3-toastify';
 
 const auth = useAuthStore()
 const solicitude = ref(null)
@@ -145,7 +146,10 @@ const route = useRoute()
 function updateSolicitude(status){
     if( window.confirm('Desea actualizar el estado de la solicitud?') )
     axios.post(`solicitudes/${solicitude.value.id}`, {status, '_method':'PUT'})
-    .then(response => solicitude.value = response.data.data)
+    .then(response => {
+        solicitude.value = response.data.data
+        toast.success('Solicitud actualizada con éxito');
+    })
     .catch(error => console.log(error.response))
 }
 

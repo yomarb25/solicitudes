@@ -44,7 +44,10 @@
                                     {{ solicitude.cui }}
                                 </td>
                                 <td>
-                                    {{ solicitude.status }}
+                                    <span class="badge bg-primary"
+                                    :class="{'bg-success':solicitude.status == 'aprobada', 'bg-danger':solicitude.status == 'denegada', 'bg-success':solicitude.secondary == 'pendiente'}">
+                                        {{ solicitude.status }}
+                                    </span>
                                 </td>
                                 <td>
                                     <router-link :to="`/solicitudes/${solicitude.id}`">Ver</router-link>

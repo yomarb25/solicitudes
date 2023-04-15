@@ -9,10 +9,8 @@
                     <div class="row">
                         <div class="col-lg-4 mb-3">
                             <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
-                            <input type="date" class="form-control" id="fecha_nacimiento"
-                                v-model="solicitude.fecha_nacimiento"  required/>
-                            <div id="emailHelp" class="invalid-feedback">We'll never share your email with anyone else.
-                            </div>
+                            <input type="date" class="form-control" :class="{'is-invalid': errors.name}" id="fecha_nacimiento" v-model="solicitude.fecha_nacimiento"  required/>
+                            <div v-if="errors.fecha_nacimiento" class="invalid-feedback">{{ errors.fecha_nacimiento[0] }}</div>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <label for="sexo" class="form-label">Sexo</label>
@@ -21,6 +19,7 @@
                                 <option value="M">M</option>
                                 <option value="F">F</option>
                             </select>
+                            <div v-if="errors.sexo" class="invalid-feedback">{{ errors.sexo[0] }}</div>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <label for="estado_civil" class="form-label">Estado civil</label>
@@ -31,74 +30,70 @@
                                 <option value="divorciado">Divorciado</option>
                                 <option value="viudo">Viudo</option>
                             </select>
+                            <div v-if="errors.estado_civil" class="invalid-feedback">{{ errors.estado_civil[0] }}</div>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <label for="primer_nombre" class="form-label">Primer nombre</label>
-                            <input type="text" class="form-control" id="primer_nombre" v-model="solicitude.primer_nombre" required>
-                            <div id="emailHelp" class="invalid-feedback">We'll never share your email with anyone else.
-                            </div>
+                            <input type="text" class="form-control" :class="{'is-invalid': errors.primer_nombre}" id="primer_nombre" v-model="solicitude.primer_nombre" required>
+                            <div v-if="errors.primer_nombre" class="invalid-feedback">{{ errors.primer_nombre[0] }}</div>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <label for="segundo_nombre" class="form-label">Segundo nombre</label>
-                            <input type="text" class="form-control" id="segundo_nombre" v-model="solicitude.segundo_nombre">
-                            <div id="emailHelp" class="invalid-feedback">We'll never share your email with anyone else.
-                            </div>
+                            <input type="text" class="form-control" :class="{'is-invalid': errors.segundo_nombre}" id="segundo_nombre" v-model="solicitude.segundo_nombre">
+                            <div v-if="errors.segundo_nombre" class="invalid-feedback">{{ errors.segundo_nombre[0] }}</div>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <label for="primer_apellido" class="form-label">Primer apellido</label>
-                            <input type="text" class="form-control" id="primer_apellido"
+                            <input type="text" class="form-control" :class="{'is-invalid': errors.primer_apellido}" id="primer_apellido"
                                 v-model="solicitude.primer_apellido" required>
-                            <div id="emailHelp" class="invalid-feedback">We'll never share your email with anyone else.
-                            </div>
+                                <div v-if="errors.primer_apellido" class="invalid-feedback">{{ errors.primer_apellido[0] }}</div>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <label for="segundo_apellido" class="form-label">Segundo apellido</label>
-                            <input type="text" class="form-control" id="segundo_apellido"
+                            <input type="text" class="form-control" :class="{'is-invalid': errors.segundo_apellido}" id="segundo_apellido"
                                 v-model="solicitude.segundo_apellido">
-                            <div id="emailHelp" class="invalid-feedback">We'll never share your email with anyone else.
-                            </div>
+                                <div v-if="errors.segundo_apellido" class="invalid-feedback">{{ errors.segundo_apellido[0] }}</div>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <label for="telefono" class="form-label">Número telefónico trabajador</label>
-                            <input type="tel" class="form-control" id="telefono" v-model="solicitude.telefono" required>
-                            <div id="emailHelp" class="invalid-feedback">We'll never share your email with anyone else.
-                            </div>
+                            <input type="tel" class="form-control" :class="{'is-invalid': errors.telefono}" id="telefono" v-model="solicitude.telefono" required>
+                            <div v-if="errors.telefono" class="invalid-feedback">{{ errors.telefono[0] }}</div>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <label for="email" class="form-label">Correo electrónico trabajador</label>
-                            <input type="email" class="form-control" id="email" v-model="solicitude.email" required>
-                            <div id="emailHelp" class="invalid-feedback">We'll never share your email with anyone else.
-                            </div>
+                            <input type="email" class="form-control" :class="{'is-invalid': errors.email}" id="email" v-model="solicitude.email" required>
+                            <div v-if="errors.email" class="invalid-feedback">{{ errors.email[0] }}</div>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <label for="email_confirmation" class="form-label">Confirmar correo trabajador</label>
-                            <input type="email" class="form-control" id="email_confirmation"
+                            <input type="email" class="form-control" :class="{'is-invalid': errors.email_confirmation}" id="email_confirmation"
                                 v-model="solicitude.email_confirmation" required>
-                            <div id="emailHelp" class="invalid-feedback">We'll never share your email with anyone else.
-                            </div>
+                                <div v-if="errors.email_confirmation" class="invalid-feedback">{{ errors.email_confirmation[0] }}</div>
                         </div>
                         <div class="d-none d-lg-block col-lg-8"></div>
                         <div class="col-lg-4 mb-3">
                             <label for="tipo_documento" class="form-label">Tipo documento</label>
                             <select id="tipo_documento" class="form-select" v-model="solicitude.tipo_documento" required>
                                 <option value="" selected>Seleccione una opción</option>
-                                <option value="1">Nacional</option>
-                                <option value="2">Extranjero</option>
+                                <option value="nacional">Nacional</option>
+                                <option value="extranjero">Extranjero</option>
                             </select>
+                            <div v-if="errors.tipo_documento" class="invalid-feedback">{{ errors.tipo_documento[0] }}</div>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <label for="cui" class="form-label">CUI</label>
-                            <input type="text" v-model="solicitude.cui" required class="form-control">
+                            <input type="text" v-model="solicitude.cui" required class="form-control" :class="{'is-invalid': errors.cui}">
+                            <div v-if="errors.cui" class="invalid-feedback">{{ errors.cui[0] }}</div>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <label for="cui" class="form-label">DPI</label>
-                            <input type="file" ref="attachmentInput" class="form-control">
+                            <input type="file" ref="attachmentInput" class="form-control" :class="{'is-invalid': errors.attachment}">
+                            <div class="invalid-feedback" v-if="errors.attachment">{{ errors.attachment[0] }}</div>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <label for="direccion" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" id="direccion" v-model="solicitude.direccion" required>
-                            <div id="emailHelp" class="invalid-feedback">We'll never share your email with anyone else.
-                            </div>
+                            <input type="text" class="form-control" :class="{'is-invalid': errors.name}" id="direccion" v-model="solicitude.direccion" required>
+                            <div class="invalid-feedback" v-if="errors.direccion">{{ errors.direccion[0] }}</div>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <label for="departamento" class="form-label">Departamento</label>
@@ -134,7 +129,10 @@
 
 <script setup>
 import { ref } from 'vue'
+import { toast } from 'vue3-toastify';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const attachmentInput = ref(null)
 const solicitude = ref(
     {
@@ -155,6 +153,8 @@ const solicitude = ref(
     }
 )
 
+const errors = ref({})
+
 function storeSolicitude() {
     const data = new FormData()
     const values = { ...solicitude.value }
@@ -163,12 +163,19 @@ function storeSolicitude() {
         data.append(key, values[key])
     })
 
-    if (attachmentInput && attachmentInput.value && attachmentInput.value.files.length) {
+    if (attachmentInput.value.files.length) {
         data.append('attachment', attachmentInput.value.files[0])
     }
 
     axios.post('solicitudes', data)
-        .then(response => { console.log(response.data.data) })
-        .catch(error => console.log(error.response.data))
+        .then(response => {
+            router.push('/solicitudes')
+            toast.success('Solicitud creada con éxito');
+        })
+        .catch(error => {
+            if( error.response && error.response.data.errors ){
+                errors.value = error.response.data.errors
+            }
+        })
 }
 </script>
